@@ -22,10 +22,10 @@ require_once 'GeneralHTML.php';
         for($i=0;$i<$nb;$i++ ){
             echo($tabElements[$i]["NumP"]." ". $tabElements[$i]["NomP"]." "
                  .$tabElements[$i]["PrenomP"]." ");
-            if ($tabElements[$i]["SexeP"] == "M")
-                 echo ("Masculin <BR/>");
+            if ($tabElements[$i]["SexeP"] == "E")
+                 echo ("Essence <BR/>");
             else
-                 echo ("Feminin <BR/>");
+                 echo ("Diesel <BR/>");
         }
         $this->general->getRetourAccueil();
         $this->general->getFinPage();
@@ -40,15 +40,63 @@ require_once 'GeneralHTML.php';
         
         ?>
             <form action="do.php " method="GET">
-                    Nom 
+                    Marque :  
                     <input type="text" name="nomP" size="20" ><BR/><BR/>
-                    Prenom
+                    Modèle : 
                     <input type="text" name="prenomP" size="20" ><BR/><BR/>
-                    Sexe <BR/>
-                    <INPUT type='radio' name='sexeP' value='M'> Masculin <BR/>
-                    <INPUT type='radio' name='sexeP' value='F'> Feminin <BR/>
+                    Carburant :  <BR/>
+                    <INPUT type='radio' name='sexeP' value='E'> Essence <BR/>
+                    <INPUT type='radio' name='sexeP' value='D'> Diesel <BR/>
                     <br/><br/>
                     <input type="hidden" name="action" value="inserePersonne">
+                    <input type="submit" value="Envoyer" >
+                    <input type="reset" value="Annuler" >
+                </form>
+        <?php
+        
+        $this->general->getFinPage();
+    }
+    
+    public function afficheFormSupprPersonne(){
+        $this->general->getDebutPage("Suppression d'une personne");
+        //attention : dans le formulaire, l'action envoyée est 
+        //de la forme do.php?action=inserePersonne&nomP=MyTaylorIsRich&Prenom=Very&sexeP="M"
+        //pour envoyer le paramètre inserePersonne, il faut le placer dans un input caché
+        
+        ?>
+            <form action="do.php " method="GET">
+                    Numéro du véhicule :  
+                    <input type="text" name="numP" size="20" ><BR/><BR/>
+                    <br/>
+                    <input type="hidden" name="action" value="SupprPersonne">
+                    <input type="submit" value="Envoyer" >
+                    <input type="reset" value="Annuler" >
+                </form>
+        <?php
+        
+        $this->general->getFinPage();
+    }
+    
+    public function afficheFormModifPersonne(){
+        $this->general->getDebutPage("Modification d'une personne");
+        //attention : dans le formulaire, l'action envoyée est 
+        //de la forme do.php?action=inserePersonne&nomP=MyTaylorIsRich&Prenom=Very&sexeP="M"
+        //pour envoyer le paramètre inserePersonne, il faut le placer dans un input caché
+        
+        ?>
+            <p align="center"><font size="6pt" color="red"><b> Bien compléter tous les champs, sinon les données seront perdues !</b></font></p><br><br>
+            <form action="do.php " method="GET">
+                     Numéro du véhicule :  
+                    <input type="text" name="numP" size="20" ><BR/><BR/>
+                    Marque :  
+                    <input type="text" name="nomP" size="20" ><BR/><BR/>
+                    Modèle : 
+                    <input type="text" name="prenomP" size="20" ><BR/><BR/>
+                    Carburant :  <BR/>
+                    <INPUT type='radio' name='sexeP' value='E'> Essence <BR/>
+                    <INPUT type='radio' name='sexeP' value='D'> Diesel <BR/>
+                    <br/><br/>
+                    <input type="hidden" name="action" value="modifPersonne">
                     <input type="submit" value="Envoyer" >
                     <input type="reset" value="Annuler" >
                 </form>
@@ -60,7 +108,7 @@ require_once 'GeneralHTML.php';
     public function afficheInsertPersonneOK(){
         $this->general->getDebutPage("Insertion OK");
         ?>
-        La personne est bien insérée dans la base
+        La voiture est bien insérée/supprimée dans la base
         <?php
         $this->general->getRetourAccueil();
         $this->general->getFinPage();
@@ -69,7 +117,7 @@ require_once 'GeneralHTML.php';
     public function afficheInsertPersonneNonOK(){
         $this->general->getDebutPage("Insertion pas bien déroulée");
         ?>
-        La personne n'a pas été insérée dans la base
+        La voiture n'a pas été insérée/supprimée dans la base
         <?php
         $this->general->getRetourAccueil();
         $this->general->getFinPage();
